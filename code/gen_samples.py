@@ -96,6 +96,9 @@ for mall_id in tqdm(train.mall_id.unique()):
         predSorted = (-pred).argsort()
         for i in range(10):
             train_samples.append({'row_id':row_id,'shop_id':lbl.inverse_transform(predSorted[i]),'prob':pred[predSorted[i]]})
+            
+train_samples = pd.DataFrame(train_samples)
+test_samples = pd.DataFrame(test_samples)
 
 train_samples.to_pickle(open('../data/train_samples_top10.pkl', 'wb'))
 test_samples.to_pickle(open('../data/test_samples_top10.pkl', 'wb'))
